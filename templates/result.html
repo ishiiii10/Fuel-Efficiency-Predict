@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fuel Efficiency Prediction Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Function to toggle dark/light mode
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            
+            // Save preference to localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            } else {
+                localStorage.setItem('theme', 'light');
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon';
+            }
+        }
+
+        // Initialize on page load
+        window.onload = function() {
+            // Check saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
+        
+        <div class="result-container">
+            <!-- Improved title -->
+            <div class="title-container">
+                <h2><i class="fa-solid fa-chart-simple"></i> Prediction Results</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="prediction">
+                <p>The predicted fuel efficiency (MPG) is:</p>
+                <span class="prediction-value">{{ prediction }}</span>
+                
+                {% if prediction > 35 %}
+                    <i class="fa-solid fa-leaf efficiency-icon excellent"></i>
+                {% elif prediction > 25 %}
+                    <i class="fa-solid fa-gauge-high efficiency-icon good"></i>
+                {% elif prediction > 18 %}
+                    <i class="fa-solid fa-gauge efficiency-icon average"></i>
+                {% else %}
+                    <i class="fa-solid fa-gas-pump efficiency-icon poor"></i>
+                {% endif %}
+            </div>
+            
+            <div class="model-details">
+                <h3>Model Information</h3>
+                <p><strong>Model Used:</strong> 
+                    {% if model_type == 'linear' %}
+                        Linear Regression <i class="fa-solid fa-chart-line"></i>
+                    {% elif model_type == 'decision' %}
+                        Decision Tree <i class="fa-solid fa-sitemap"></i>
+                    {% elif model_type == 'stacked' %}
+                        Advanced Stacked Ensemble <i class="fa-solid fa-layer-group"></i>
+                    {% endif %}
+                </p>
+                
+                <p><strong>Model Accuracy:</strong> {{ accuracy }}</p>
+                
+                {% if model_type == 'stacked' %}
+                <div class="advanced-info">
+                    <p><i class="fa-solid fa-brain"></i> The advanced model combines multiple algorithms (Gradient Boosting, Random Forest, and Neural Network) 
+                    with feature engineering to achieve higher accuracy.</p>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="interpretation">
+                <h3>What this means:</h3>
+                {% if prediction > 35 %}
+                    <p><i class="fa-solid fa-circle-check"></i> This vehicle has <strong>excellent</strong> fuel efficiency! It's well above average and very economical.</p>
+                {% elif prediction > 25 %}
+                    <p><i class="fa-solid fa-thumbs-up"></i> This vehicle has <strong>good</strong> fuel efficiency. It's better than average.</p>
+                {% elif prediction > 18 %}
+                    <p><i class="fa-solid fa-equals"></i> This vehicle has <strong>average</strong> fuel efficiency.</p>
+                {% else %}
+                    <p><i class="fa-solid fa-circle-exclamation"></i> This vehicle has <strong>below average</strong> fuel efficiency. Consider fuel-efficient alternatives.</p>
+                {% endif %}
+            </div>
+            
+            <div class="back-link">
+                <a href="/"><i class="fa-solid fa-arrow-left"></i> Make another prediction</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
