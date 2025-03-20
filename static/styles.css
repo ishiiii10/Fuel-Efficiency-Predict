@@ -17,23 +17,6 @@
     --transition-speed: 0.3s;
 }
 
-.dark-mode {
-    --primary-color: #4fa3e0;
-    --primary-dark: #2980b9;
-    --primary-light: #1a2733;
-    --text-color: #f0f0f0;
-    --bg-color: #121212;
-    --card-bg: rgba(30, 30, 30, 0.95);
-    --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --info-bg: rgba(15, 40, 61, 0.8);
-    --grid-color: #2d2d2d;
-    --title-color: #4fa3e0;
-    --line-color: #4fa3e0;
-    --accent-color: #2ecc71;
-    --transition-speed: 0.3s;
-}
-
 body {
     font-family: "IBM Plex Mono", monospace;
     line-height: 1.6;
@@ -52,6 +35,23 @@ body {
     margin: 0 auto;
     padding: 30px 20px;
     position: relative;
+}
+
+.dark-mode {
+    --primary-color: #4fa3e0;
+    --primary-dark: #2980b9;
+    --primary-light: #1a2733;
+    --text-color: #f0f0f0;
+    --bg-color: #121212;
+    --card-bg: rgba(30, 30, 30, 0.95);
+    --border-color: #333;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --info-bg: rgba(15, 40, 61, 0.8);
+    --grid-color: #2d2d2d;
+    --title-color: #4fa3e0;
+    --line-color: #4fa3e0;
+    --accent-color: #2ecc71;
+    --transition-speed: 0.3s;
 }
 
 /* Theme toggle button */
@@ -101,7 +101,6 @@ h2 {
     position: relative;
     display: inline-block;
     animation: titleFloat 3s ease-in-out infinite;
-    text-shadow: 2px 2px 4px var(--shadow-color);
     transform-style: preserve-3d;
 }
 
@@ -121,10 +120,10 @@ h2 i {
 }
 
 h3 {
-    color: var(--primary-color);
+    color: var(--secondary-text);
     margin-top: 25px;
     margin-bottom: 15px;
-    font-weight: 500;
+    font-weight: 600;
     animation: fadeIn 0.8s ease;
 }
 
@@ -280,12 +279,12 @@ button:hover::after {
 
 .prediction-value {
     font-weight: bold;
-    color: var(--title-color);
+    color: var(--highlight-text);
     font-size: 42px;
     display: block;
     margin: 15px 0;
     transition: all var(--transition-speed) ease;
-    text-shadow: 0 2px 5px var(--shadow-color);
+    text-shadow: 2px 2px 15px rgba(255, 69, 0, 0.4);
     animation: pulse 2s infinite;
 }
 
@@ -594,10 +593,10 @@ button:hover::after {
 
 @keyframes titleFloat {
     0%, 100% {
-        transform: translateY(0) rotate3d(1, 0, 0, 0deg);
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px) rotate3d(1, 0, 0, 5deg);
+        transform: translateY(-10px);
     }
 }
 
@@ -682,4 +681,330 @@ button:hover::after {
 
 .dark-mode .home-button:hover {
     background: rgba(33, 150, 243, 1);
+}
+
+.accuracy {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 10px 0;
+    text-shadow: 2px 2px 8px rgba(127, 255, 0, 0.3);
+}
+
+.get-started-btn {
+    background: linear-gradient(45deg, var(--accent-color), var(--primary-color));
+    color: #000000;
+    padding: 15px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 1.3em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin: 30px 0;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+    text-shadow: none;
+}
+
+.get-started-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 25px rgba(0, 255, 255, 0.5);
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+}
+
+/* Neon Theme Variables */
+.neon-theme {
+    --neon-primary: #00f3ff;    /* Bright Cyan */
+    --neon-secondary: #ff00e6;  /* Hot Pink */
+    --neon-accent: #7000ff;     /* Bright Purple */
+    --neon-text: #ffffff;       /* Pure White */
+    --neon-bg: #0a001a;        /* Deep Purple Background */
+    --neon-grid: rgba(0, 243, 255, 0.15);
+    background: var(--neon-bg);
+    color: var(--neon-text);
+    background-image: 
+        linear-gradient(var(--neon-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--neon-grid) 1px, transparent 1px);
+    background-size: 30px 30px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.neon-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.1), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.neon-theme .home-container {
+    background: rgba(10, 0, 26, 0.8);
+    border: 2px solid var(--neon-primary);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 20px;
+}
+
+.neon-theme .intro-text {
+    color: var(--neon-text);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+.neon-theme .wheel {
+    filter: drop-shadow(0 0 20px var(--neon-primary));
+}
+
+.neon-theme .model-card {
+    background: rgba(10, 0, 26, 0.7);
+    border: 2px solid var(--neon-secondary);
+    padding: 25px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.neon-theme .model-card:hover {
+    border-color: var(--neon-primary);
+    transform: translateY(-10px);
+}
+
+.neon-theme .model-card h3 {
+    color: var(--neon-secondary);
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.neon-theme .model-card h3 i {
+    color: var(--neon-primary);
+    margin-right: 8px;
+}
+
+.neon-theme .accuracy {
+    color: var(--neon-accent);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.neon-theme .model-card p {
+    color: var(--neon-text);
+    line-height: 1.5;
+}
+
+.neon-theme .get-started-btn {
+    background: var(--neon-primary);
+    color: var(--neon-bg);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 15px 35px;
+    border-radius: 30px;
+    border: none;
+    transition: all 0.3s ease;
+    margin-top: 40px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.neon-theme .get-started-btn:hover {
+    background: var(--neon-secondary);
+    transform: translateY(-5px);
+}
+
+.neon-theme .get-started-btn i {
+    margin-right: 8px;
+}
+
+.neon-theme .title-container h2 {
+    color: var(--neon-secondary);
+    font-size: 2.8em;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.neon-theme .title-container h2 i {
+    color: var(--neon-primary);
+}
+
+.neon-theme .title-underline {
+    background: linear-gradient(90deg, transparent, var(--neon-primary), transparent);
+    height: 3px;
+    width: 150px;
+}
+
+.neon-theme .models-section h2 {
+    color: var(--neon-primary);
+    font-size: 2em;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.neon-theme .models-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--neon-accent), transparent);
+}
+
+/* Remove all text-shadow and box-shadow properties */
+.neon-theme *:not(button):not(input):not(select) {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.neon-theme button,
+.neon-theme input,
+.neon-theme select {
+    box-shadow: none !important;
+}
+
+/* Remove animations except for the wheel */
+.neon-theme .container,
+.neon-theme button,
+.neon-theme input,
+.neon-theme select {
+    animation: none !important;
+}
+
+/* Keep the wheel animation */
+.neon-theme .wheel {
+    animation: spin 15s linear infinite !important;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+/* Home Page Specific Styles */
+body.home-page {
+    background-image: url('/static/images/vintage-racing-cars.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.home-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.title-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title-container h2 {
+    color: var(--title-color);
+    font-size: 2.8em;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.title-underline {
+    height: 3px;
+    width: 150px;
+    background: var(--line-color);
+    margin: 0 auto;
+}
+
+.intro-text {
+    color: var(--text-color);
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.models-section {
+    margin-top: 40px;
+}
+
+.models-section h2 {
+    text-align: center;
+    color: var(--title-color);
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.model-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.model-card:hover {
+    transform: translateY(-5px);
+}
+
+.model-card h3 {
+    color: var(--title-color);
+    font-size: 1.4em;
+    margin-bottom: 15px;
+}
+
+.model-card p {
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.accuracy {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.get-started-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 30px;
+}
+
+.get-started-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+}
+
+.get-started-btn i {
+    margin-right: 8px;
+}
+
+/* Keep the wheel animation */
+.wheel {
+    animation: spin 15s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
 } 

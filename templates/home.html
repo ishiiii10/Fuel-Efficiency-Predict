@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Fuel Efficiency Predictor - Home</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
@@ -12,6 +12,40 @@
             padding: 50px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            background-image: url("{{ url_for('static', filename='images/vintage-racing.jpg') }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .home-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            z-index: 1;
+        }
+        
+        .dark-mode .home-container {
+            background-color: rgba(30, 30, 30, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dark-mode .home-container::before {
+            background: rgba(30, 30, 30, 0.9);
+        }
+        
+        .home-container > * {
+            position: relative;
+            z-index: 2;
         }
         
         .intro-text {
@@ -19,6 +53,7 @@
             max-width: 800px;
             margin: 20px auto 30px;
             line-height: 1.6;
+            color: var(--text-color);
         }
         
         .wheel-container {
@@ -26,7 +61,8 @@
             width: 300px;
             height: 300px;
             margin: 40px auto;
-            perspective: 1000px;
+            perspective: 1200px;
+            transform-style: preserve-3d;
         }
         
         .wheel {
@@ -35,17 +71,22 @@
             position: relative;
             animation: spin 15s linear infinite;
             transform-style: preserve-3d;
-            transition: all 0.5s ease;
+            transform: rotateX(20deg);
         }
         
         .wheel:hover {
             animation-play-state: paused;
-            transform: scale(1.05);
+            transform: rotateX(20deg) scale(1.1);
+            transition: transform 0.3s ease;
         }
         
         @keyframes spin {
-            from { transform: rotateY(0deg); }
-            to { transform: rotateY(360deg); }
+            from { 
+                transform: rotateX(20deg) rotateY(0deg); 
+            }
+            to { 
+                transform: rotateX(20deg) rotateY(360deg); 
+            }
         }
         
         .wheel img {
@@ -56,112 +97,30 @@
             top: 0;
             left: 0;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
-            transition: all 0.3s ease;
+            transition: filter 0.3s ease;
         }
         
-        .wheel img:hover {
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)) brightness(1.1);
+        .wheel:hover img {
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
         }
         
-        /* Fallback wheel animation */
-        .fallback-wheel {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            display: none;
-            animation: spin 15s linear infinite;
+        .dark-mode .wheel img {
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
         }
         
-        .fallback-wheel .wheel-rim {
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 15px solid #e91e63;
-            top: 25px;
-            left: 25px;
-            box-shadow: 0 0 15px rgba(233, 30, 99, 0.5);
-        }
-        
-        .fallback-wheel .wheel-tire {
-            position: absolute;
-            width: 270px;
-            height: 270px;
-            border-radius: 50%;
-            border: 15px solid #333;
-            top: 0;
-            left: 0;
-        }
-        
-        .fallback-wheel .wheel-center {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            background: #ffc107;
-            border-radius: 50%;
-            top: 120px;
-            left: 120px;
-            box-shadow: 0 0 10px rgba(255, 193, 7, 0.7);
-        }
-        
-        .fallback-wheel .spoke {
-            position: absolute;
-            width: 10px;
-            height: 95px;
-            background: #00bcd4;
-            top: 102px;
-            left: 145px;
-            transform-origin: center bottom;
-            box-shadow: 0 0 5px rgba(0, 188, 212, 0.7);
-        }
-        
-        .fallback-wheel .spoke:nth-child(1) { transform: rotate(0deg); }
-        .fallback-wheel .spoke:nth-child(2) { transform: rotate(60deg); }
-        .fallback-wheel .spoke:nth-child(3) { transform: rotate(120deg); }
-        .fallback-wheel .spoke:nth-child(4) { transform: rotate(180deg); }
-        .fallback-wheel .spoke:nth-child(5) { transform: rotate(240deg); }
-        .fallback-wheel .spoke:nth-child(6) { transform: rotate(300deg); }
-        
-        .get-started-btn {
-            background: linear-gradient(45deg, #4CAF50, #2196F3);
-            color: white;
-            padding: 15px 35px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 1.3em;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin: 30px 0;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        
-        .get-started-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 7px 15px rgba(0,0,0,0.3);
+        .dark-mode .wheel:hover img {
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.7));
         }
         
         .models-section {
-            margin-top: 60px;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
         }
         
         .models-section h2 {
             font-size: 1.8em;
             margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .models-section h2:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(to right, transparent, #4CAF50, #2196F3, transparent);
         }
         
         .models-grid {
@@ -172,148 +131,152 @@
         }
         
         .model-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
             transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .dark-mode .model-card {
-            background: rgba(30, 30, 30, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
         
         .model-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
         
         .model-card h3 {
-            color: #4CAF50;
+            color: var(--title-color);
             font-size: 1.4em;
             margin-bottom: 15px;
         }
         
-        .dark-mode .model-card h3 {
-            color: #6CD97E;
-        }
-        
-        .accuracy {
-            font-weight: bold;
-            font-size: 1.2em;
-            margin: 10px 0;
-            color: #2196F3;
-        }
-        
-        .dark-mode .accuracy {
-            color: #64B5F6;
-        }
-        
         .model-card p {
+            color: var(--text-color);
             margin: 10px 0;
             line-height: 1.5;
         }
         
-        .theme-toggle {
-            position: fixed;
+        .get-started-btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 30px 0;
+        }
+        
+        .get-started-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+        
+        .get-started-btn i {
+            margin-right: 8px;
+        }
+
+        /* Updated home button styles */
+        .home-button {
+            position: absolute;
             top: 20px;
-            right: 20px;
-            z-index: 100;
-            background: none;
-            border: none;
-            color: inherit;
-            font-size: 1.5em;
-            cursor: pointer;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            left: 20px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9em;
             display: flex;
             align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
         }
-        
-        .dark-mode .theme-toggle {
-            background: rgba(255, 255, 255, 0.1);
+
+        .home-button:hover {
+            background: linear-gradient(135deg, #1E88E5, #1565C0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
         }
-        
-        /* Dark mode specific styles for the wheel */
-        .dark-mode .wheel img {
-            filter: drop-shadow(0 10px 20px rgba(0, 188, 212, 0.4)) brightness(1.1);
+
+        .home-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
         }
-        
-        .dark-mode .fallback-wheel .wheel-tire {
-            border-color: #111;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+        .dark-mode .home-button {
+            background: linear-gradient(135deg, #42A5F5, #1E88E5);
+            box-shadow: 0 3px 10px rgba(66, 165, 245, 0.3);
+        }
+
+        .dark-mode .home-button:hover {
+            background: linear-gradient(135deg, #64B5F6, #2196F3);
+            box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
         }
     </style>
 </head>
 <body>
-    <div class="home-container">
-        <div class="title-container">
-            <h1><i class="fa-solid fa-car"></i> Fuel Efficiency Predictor</h1>
-            <div class="title-underline"></div>
-        </div>
+    <div class="container">
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
         
-        <p class="intro-text">
-            Welcome to the Fuel Efficiency Predictor! This intelligent application helps you estimate the fuel efficiency 
-            of various vehicles using advanced machine learning models tailored to your specific vehicle characteristics.
-        </p>
-        
-        <div class="wheel-container">
-            <div class="wheel" id="wheel">
-                <img src="{{ url_for('static', filename='images/wheel.png') }}" alt="Colorful Car Wheel" id="wheel-image" onerror="showFallbackWheel()">
-            </div>
-            <div class="fallback-wheel" id="fallback-wheel">
-                <div class="wheel-tire"></div>
-                <div class="wheel-rim"></div>
-                <div class="spoke"></div>
-                <div class="spoke"></div>
-                <div class="spoke"></div>
-                <div class="spoke"></div>
-                <div class="spoke"></div>
-                <div class="spoke"></div>
-                <div class="wheel-center"></div>
-            </div>
-        </div>
-        
-        <a href="{{ url_for('predict_form') }}" class="get-started-btn" id="get-started">
-            <i class="fa-solid fa-play"></i> Get Started
+        <!-- Home button -->
+        <a href="{{ url_for('home') }}" class="home-button">
+            <i class="fa-solid fa-home"></i> Home
         </a>
         
-        <div class="models-section">
-            <h2>Our Prediction Models</h2>
+        <!-- Title -->
+        <div class="title-container">
+            <h2><i class="fa-solid fa-car"></i> Fuel Efficiency Predictor</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="home-container">
+            <div class="intro-text">
+                Welcome to the Fuel Efficiency Predictor! This advanced tool uses machine learning to predict your vehicle's fuel efficiency based on various characteristics.
+            </div>
             
-            <div class="models-grid">
-                <div class="model-card">
-                    <h3><i class="fa-solid fa-chart-line"></i> Linear Regression</h3>
-                    <div class="accuracy">Accuracy: 70.2%</div>
-                    <p>A basic prediction model that establishes linear relationships between vehicle features and fuel efficiency. Best for quick estimates with limited data.</p>
+            <div class="wheel-container">
+                <div class="wheel">
+                    <img src="{{ url_for('static', filename='images/wheel.png') }}" alt="Spinning Wheel">
                 </div>
-                
-                <div class="model-card">
-                    <h3><i class="fa-solid fa-tree"></i> Decision Tree</h3>
-                    <div class="accuracy">Accuracy: 73.1%</div>
-                    <p>A tree-based model that effectively handles non-linear relationships between features, providing better insights into feature importance.</p>
-                </div>
-                
-                <div class="model-card">
-                    <h3><i class="fa-solid fa-layer-group"></i> Advanced Stacked Model</h3>
-                    <div class="accuracy">Accuracy: 97.7%</div>
-                    <p>Our premium ensemble learning model combining multiple algorithms with advanced features for the highest precision predictions available.</p>
+            </div>
+
+            <a href="{{ url_for('predict_form') }}" class="get-started-btn">
+                <i class="fa-solid fa-rocket"></i> Get Started
+            </a>
+
+            <div class="models-section">
+                <h2>Available Models</h2>
+                <div class="models-grid">
+                    <div class="model-card">
+                        <h3><i class="fa-solid fa-chart-line"></i> Linear Regression</h3>
+                        <div class="accuracy">70% Accuracy</div>
+                        <p>Basic model suitable for quick estimates. Uses fundamental vehicle characteristics.</p>
+                    </div>
+                    
+                    <div class="model-card">
+                        <h3><i class="fa-solid fa-tree"></i> Decision Tree</h3>
+                        <div class="accuracy">73% Accuracy</div>
+                        <p>More advanced model that can capture non-linear relationships in the data.</p>
+                    </div>
+                    
+                    <div class="model-card">
+                        <h3><i class="fa-solid fa-layer-group"></i> Advanced Stacked</h3>
+                        <div class="accuracy">97.7% Accuracy</div>
+                        <p>State-of-the-art ensemble model combining multiple advanced algorithms.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Theme toggle button -->
-    <button class="theme-toggle" onclick="toggleTheme()">
-        <i id="theme-icon" class="fa-solid fa-moon"></i>
-    </button>
-    
+
     <script>
         // Function to toggle dark/light mode
         function toggleTheme() {
@@ -329,47 +292,14 @@
                 document.getElementById('theme-icon').className = 'fa-solid fa-moon';
             }
         }
-        
-        // Function to show fallback wheel animation if image fails to load
-        function showFallbackWheel() {
-            document.getElementById('wheel-image').style.display = 'none';
-            document.getElementById('fallback-wheel').style.display = 'block';
-        }
-        
-        // Function to add interactive wheel effects
-        function addWheelEffects() {
-            const wheel = document.getElementById('wheel');
-            const getStartedBtn = document.getElementById('get-started');
-            
-            // Speed up wheel animation on button hover
-            getStartedBtn.addEventListener('mouseenter', function() {
-                wheel.style.animationDuration = '5s';
-            });
-            
-            getStartedBtn.addEventListener('mouseleave', function() {
-                wheel.style.animationDuration = '15s';
-            });
-            
-            // Add click effect to wheel
-            wheel.addEventListener('click', function() {
-                wheel.style.animationDuration = '2s';
-                setTimeout(() => {
-                    wheel.style.animationDuration = '15s';
-                }, 1000);
-            });
-        }
-        
-        // Initialize on page load
+
+        // Check saved theme preference on page load
         window.onload = function() {
-            // Check saved theme preference
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.body.classList.add('dark-mode');
                 document.getElementById('theme-icon').className = 'fa-solid fa-sun';
             }
-            
-            // Add interactive wheel effects
-            addWheelEffects();
         };
     </script>
 </body>
