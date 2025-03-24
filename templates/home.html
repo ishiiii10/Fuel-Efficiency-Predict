@@ -217,6 +217,31 @@
             background: linear-gradient(135deg, #64B5F6, #2196F3);
             box-shadow: 0 5px 15px rgba(66, 165, 245, 0.4);
         }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .nav-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .dark-mode .nav-link:hover {
+            background: rgba(74, 158, 255, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -225,6 +250,16 @@
         <button class="theme-toggle" onclick="toggleTheme()">
             <i id="theme-icon" class="fa-solid fa-moon"></i>
         </button>
+        
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="{{ url_for('about') }}" class="nav-link">
+                <i class="fa-solid fa-info-circle"></i> About
+            </a>
+            <a href="{{ url_for('working') }}" class="nav-link">
+                <i class="fa-solid fa-gears"></i> How It Works
+            </a>
+        </div>
         
         <!-- Home button -->
         <a href="{{ url_for('home') }}" class="home-button">

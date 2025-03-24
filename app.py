@@ -50,6 +50,14 @@ def home():
     # Render the home page
     return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/working')
+def working():
+    return render_template('working.html')
+
 @app.route('/predict_form')
 def predict_form():
     # Pass whether the stacked model is available

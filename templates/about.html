@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About - Fuel Efficiency Predictor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+        }
+
+        .home-button:hover {
+            background: linear-gradient(135deg, #1E88E5, #1565C0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+
+        .about-container {
+            text-align: left;
+            padding: 50px 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            background-image: url("{{ url_for('static', filename='images/car.jpg') }}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .about-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        .dark-mode .about-container {
+            background-color: rgba(30, 30, 30, 0.95);
+        }
+
+        .dark-mode .about-container::before {
+            background: rgba(30, 30, 30, 0.92);
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-section {
+            margin-bottom: 40px;
+        }
+
+        .about-section h3 {
+            color: var(--title-color);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .team-member h4 {
+            color: var(--title-color);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .team-member p {
+            color: var(--text-color);
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-color);
+            font-size: 1.1em;
+        }
+
+        .features-list li i {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .about-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .about-section h3 {
+                font-size: 1.5em;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <i id="theme-icon" class="fa-solid fa-moon"></i>
+        </button>
+        
+        <!-- Home button -->
+        <a href="{{ url_for('home') }}" class="home-button">
+            <i class="fa-solid fa-home"></i> Home
+        </a>
+
+        <!-- Title -->
+        <div class="title-container">
+            <h2><i class="fa-solid fa-info-circle"></i> About Us</h2>
+            <div class="title-underline"></div>
+        </div>
+
+        <div class="about-container">
+            <div class="about-content">
+                <div class="about-section">
+                    <h3>Our Mission</h3>
+                    <p>At Fuel Efficiency Predictor, we're dedicated to helping vehicle owners and enthusiasts make informed decisions about fuel consumption. Our advanced machine learning models provide accurate predictions based on various vehicle characteristics, enabling users to understand and optimize their vehicle's fuel efficiency.</p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Key Features</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check"></i> Multiple prediction models with up to 97.7% accuracy</li>
+                        <li><i class="fa-solid fa-check"></i> Support for various vehicle types and configurations</li>
+                        <li><i class="fa-solid fa-check"></i> User-friendly interface with instant results</li>
+                        <li><i class="fa-solid fa-check"></i> Comprehensive analysis of fuel efficiency factors</li>
+                        <li><i class="fa-solid fa-check"></i> Advanced machine learning algorithms</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h3>Our Technology</h3>
+                    <p>We utilize state-of-the-art machine learning techniques, including Linear Regression, Decision Trees, and our advanced Stacked Model. Our systems are continuously updated with the latest automotive data to ensure accurate predictions across different vehicle types and models.</p>
+                </div>
+
+                <div class="about-section">
+                    <h3>Why Choose Us</h3>
+                    <p>Our platform stands out for its accuracy, ease of use, and comprehensive approach to fuel efficiency prediction. Whether you're a car enthusiast, fleet manager, or everyday driver, our tools provide valuable insights to help you make informed decisions about vehicle fuel consumption.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle dark/light mode
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            
+            // Save preference to localStorage
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            } else {
+                localStorage.setItem('theme', 'light');
+                document.getElementById('theme-icon').className = 'fa-solid fa-moon';
+            }
+        }
+
+        // Check saved theme preference on page load
+        window.onload = function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('theme-icon').className = 'fa-solid fa-sun';
+            }
+        };
+    </script>
+</body>
+</html> 
